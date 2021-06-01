@@ -39,6 +39,19 @@ function soumission_ajouter_contact() {
         // On vérifie que le num "a la forme d'un n° de tel"
         // Expression régulière = Regular Expression = Regex
         && preg_match('#(0|\+33|0033)[1-9][0-9]{8}#', $_POST['num'])
+
+        // On reçoit une image
+        && !empty($_FILES['image'])
+
+        // Pas d'erreur
+        && $_FILES['image']['error'] == 0
+
+        // On vérifie le type
+        && ($_FILES['image']['type'] == 'image/png'
+            || $_FILES['image']['type'] == 'image/jpeg')
+
+        // On vérifie la taille du fichier (< 1Mo)
+        && $_FILES['image']['size'] < 1000000
     ) {
 
 
@@ -54,6 +67,22 @@ function soumission_ajouter_contact() {
         $contact->prenom = $_POST['prenom'];
         $contact->email = $_POST['email'];
         $contact->num_tel = $_POST['num'];
+
+
+        // On récupère l'extension du fichier
+        $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        
+        // On crée un nouveau nom pour l'image
+        $nouveau_nom_image =  uniqid() . '.' . $extension;
+
+        // On déplace l'image de son emplacement temporaire vers son nouvel emplacement
+        move_uploaded_file(
+            $_FILES['image']['tmp_name'],
+            __DIR__ . '/../../assets/img/' . $nouveau_nom_image
+        );
+
+        // On indique l'image dans notre BDD
+        $contact->image = ASSETS_URL . '/img/' . $nouveau_nom_image;
 
         // On sauvegarde le contact
         $contact->save();
