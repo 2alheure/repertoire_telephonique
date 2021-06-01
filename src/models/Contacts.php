@@ -6,4 +6,5 @@ class Contacts extends SimpleOrm {
     public $prenom;
     public $num_tel;
     public $email;
+    public $image;
 }
