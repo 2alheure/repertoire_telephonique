@@ -24,6 +24,7 @@ function se_connecter() {
             && $_POST['password'] == PASSWORD_ADMIN
         ) {
 
+            // session_start(); // (Fait dans le router)
             // $_SESSION; // On peut à présent utiliser $_SESSION
             $_SESSION['role'] = 'admin';
 
