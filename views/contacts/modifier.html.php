@@ -24,7 +24,7 @@
 
 <?php } ?>
 
-<form action="<?php echo BASE_URL; ?>/modifier-contact?id=<?php echo $contact->id; ?>" method="POST">
+<form action="<?php echo BASE_URL; ?>/modifier-contact?id=<?php echo $contact->id; ?>" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label for="nom">Nom</label>
         <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $contact->nom; ?>" placeholder="Nom" required autofocus>
@@ -43,6 +43,18 @@
     <div class="form-group">
         <label for="num">Numéro de téléphone</label>
         <input type="tel" class="form-control" name="num" id="num" value="<?php echo $contact->num_tel; ?>" placeholder="Numéro de téléphone" required>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-2">
+                <img src="<?php echo $contact->image; ?>" class="img-thumbnail">
+            </div>
+            <div class="col-10">
+                <label for="image">Image</label>
+                <input type="file" class="form-control" name="image" id="image" placeholder="Image">
+            </div>
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary">Ajouter ce contact</button>
