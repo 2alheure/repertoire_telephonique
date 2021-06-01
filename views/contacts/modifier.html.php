@@ -48,7 +48,15 @@
     <div class="form-group">
         <div class="row">
             <div class="col-2">
-                <img src="<?php echo $contact->image; ?>" class="img-thumbnail">
+                <img src="<?php
+
+                        if (!empty($c->image)) {
+                            echo $c->image;
+                        } else {
+                            echo 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png';
+                        }
+
+                    ?>" class="img-thumbnail">
             </div>
             <div class="col-10">
                 <label for="image">Image</label>
